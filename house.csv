@@ -4379,3 +4379,4 @@ UserID,Date,Mode,Category,Subcategory,Note,Amount,Income/Expense,Currency
 2,12/09/2005,,Hello,,dcsd,120.0,Income,INR
 2,12/04/2018,Cash,Hello,MU,SDfds,20.0,Expense,INR
 2,10/03/2025,Cash,food,none,three time,10.0,Expense,$
+4,10/03/2025,,salary,,double,400.0,Income,$
