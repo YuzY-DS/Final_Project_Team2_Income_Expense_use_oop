@@ -23,7 +23,7 @@ class Transaction(ABC):
 
     @abstractmethod
     def get_type(self): 
-        pass  
+        pass 
 
     @abstractmethod ## avsr=truct method 
     def __str__(self):
@@ -504,4 +504,4 @@ def main():
 
 if __name__ == '__main__':
     main()  ## testing 
-    ## b sina and jessica 
+    ## #######################

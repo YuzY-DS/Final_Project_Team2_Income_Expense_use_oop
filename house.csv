@@ -3341,6 +3341,8 @@ UserID,Date,Mode,Category,Subcategory,Note,Amount,Income/Expense,Currency
 0002,01/01/2015,Cash,Transportation,,bus - brc to Place H,30.0,Expense,INR
 0002,01/01/2015,Cash,Transportation,,share auto - hospital to brc station,10.0,Expense,INR
 0002,12/09/2005,,Hello,,fsd,20.0,Income,INR
+3,12/09/2003,Cash,sads,sdsf,dsa,210.0,Expense,INR
+3,12/12/2025,,Hello,,sdcs,30.0,Income,INR
 2,21/12/2004,,By,,BY,200.0,Income,INR
 2,19/09/2018,Saving Bank account 1,subscription,Netflix,1 month subscription,199.0,Expense,INR
 2,13/09/2018,Saving Bank account 1,Small cap fund 1,,,5000.0,Expense,INR
@@ -4376,5 +4378,4 @@ UserID,Date,Mode,Category,Subcategory,Note,Amount,Income/Expense,Currency
 2,01/01/2015,Cash,Transportation,,share auto - hospital to brc station,10.0,Expense,INR
 2,12/09/2005,,Hello,,dcsd,120.0,Income,INR
 2,12/04/2018,Cash,Hello,MU,SDfds,20.0,Expense,INR
-3,12/09/2003,Cash,sads,sdsf,dsa,210.0,Expense,INR
-3,12/12/2025,,Hello,,sdcs,30.0,Income,INR
+2,10/03/2025,Cash,food,none,three time,10.0,Expense,$
