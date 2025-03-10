@@ -420,7 +420,7 @@ def user_menu(user):
                 users = load_users()
                 print(f"Total Users: {len(users)}")
                 print(f"Admins: {sum(1 for user in users if isinstance(user, Admin))}")
-                print(f"Regular Users: {sum(1 for u in users if not isinstance(user, Admin))}")
+                print(f"Regular Users: {sum(1 for user in users if not isinstance(user, Admin))}")
             elif choice == '4':
                 break
             else:
