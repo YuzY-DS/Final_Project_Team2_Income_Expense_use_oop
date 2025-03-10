@@ -23,7 +23,7 @@ class Transaction(ABC):
 
     @abstractmethod
     def get_type(self):  ## abstruct method hello iam ratanak
-        pass
+        pass  ## hello nh hah skol 
 
     @abstractmethod ## avsr=truct method 
     def __str__(self):
