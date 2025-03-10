@@ -22,7 +22,7 @@ class Transaction(ABC):
         self.currency = currency
 
     @abstractmethod
-    def get_type(self):  ## abstruct method hello iam vatanak
+    def get_type(self):  ## abstruct method hello iam ratanak
         pass
 
     @abstractmethod ## avsr=truct method 
