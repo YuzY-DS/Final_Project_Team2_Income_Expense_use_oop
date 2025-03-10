@@ -25,7 +25,7 @@ class Transaction(ABC):
     def get_type(self):
         pass
 
-    @abstractmethod
+    @abstractmethod ## avsr=truct method 
     def __str__(self):
         pass
 # Income class child class 
