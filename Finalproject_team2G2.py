@@ -22,8 +22,8 @@ class Transaction(ABC):
         self.currency = currency
 
     @abstractmethod
-    def get_type(self):  ## abstruct method hello iam ratanak
-        pass  ## hello nh hah skol 
+    def get_type(self): 
+        pass  
 
     @abstractmethod ## avsr=truct method 
     def __str__(self):
@@ -504,3 +504,4 @@ def main():
 
 if __name__ == '__main__':
     main()  ## testing 
+    ## b sina and jessica 
