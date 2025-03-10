@@ -4,9 +4,9 @@ import sys
 from abc import ABC, abstractmethod
 from datetime import datetime
 import pandas as pd
-## FIle store use infromation 
+## FIle store users infromation for admin 
 USER_FILE = "users.csv"
-# Helper functions
+### clear system easy for testing 
 def clear_screen():
     if sys.platform.startswith('win'):
         os.system('cls')
@@ -16,7 +16,7 @@ def clear_screen():
 # Transaction classes
 class Transaction(ABC):
     def __init__(self, amount, date, description, currency):
-        self.amount = abs(amount)
+        self.amount = abs(amount) ## amount is absolute value ensure amount is not negative 
         self.date = date
         self.description = description
         self.currency = currency
@@ -56,8 +56,7 @@ class Expense(Transaction):
         return (f"{self.date.strftime('%d/%m/%Y')} | EXPENSE | "
                 f"{self.mode} | {self.category}/{self.subcategory} | "
                 f"{self.amount:.2f}{self.currency} | {self.description}")
-## Report To user 
-
+## Report To user if user expsense more than income 
 class Report_To_User:
     def __init__(self, transactions):
         self.transactions = transactions
@@ -95,7 +94,7 @@ class User:
         self._transactions = []
         self._filename = "house.csv"
         self._load_transactions()
-## load transaction from file 
+## load transaction from file that detail user input  for user management  and store in house.csv file 
     def _load_transactions(self):
         if os.path.exists(self._filename):
             try:
@@ -142,7 +141,7 @@ class User:
                         print(f"Error loading transaction: {error_message}")
             except Exception as error_message:
                 print(f"Error loading transactions: {error_message}")
-
+## save transaction for each user to house transaction 
     def save_transactions(self):
         if not self._transactions:
             return ## nothing to save
@@ -179,22 +178,22 @@ class User:
             combined_df.to_csv(self._filename, index=False)
         except Exception as e:
             print(f"Error saving transactions: {e}")## if error occurs in file  print this 
-
-    def add_transaction(self, transaction):
+## add transaction to house.csv file details user information 
+    def add_transaction(self, transaction):   ## add transaction to user table 
         self._transactions.append(transaction)
         self.save_transactions()
 
     def get_transactions(self):
         return self._transactions.copy()
-
+# user id is private 
     @property
     def user_id(self):
         return self._user_id
-
+## username is private 
     @property
     def username(self):
         return self._username
-
+## password verification for password ensure password is correct
     def verify_password(self, password):
         return self._password == password
 
@@ -202,7 +201,7 @@ class Admin(User):
     def __init__(self, user_id, fullname, username, password):
         super().__init__(user_id, fullname, username, password, role="Admin")
 
-def load_users():
+def load_users():   ## ## load users  completely function to load users from user.csv file
     users = []
     if os.path.exists(USER_FILE):
         try:
@@ -236,7 +235,7 @@ def load_users():
             print("Error: User ID '1' is already taken by a regular user")
     
     return users
-## Save user name to user.csv file
+## Save user name to user.csv file    file store only information users.csv 
 def save_users(users):
     try:
         with open(USER_FILE, 'w', newline='') as file:
@@ -252,8 +251,8 @@ def save_users(users):
                 ])
     except Exception as e:
         print(f"Error saving users: {e}")
-
-def add_transaction(user):
+## function add transaction from user input their monthly transaction 
+def add_transaction(user):  ## ## completed function add transaction to user
     try:
         print("\nAdd New Transaction:")
         date = input("Date (DD/MM/YYYY): ")
@@ -293,7 +292,7 @@ def add_transaction(user):
         print(f"\nInvalid input: {error_message}")
     except Exception as error_message:
         print(f"\nError: {error_message}")
-
+## check input correct for mat 
 def check_input_month_and_year(input_string):
     try:
         ## using the `strptime` method of `datetime` to convert the string into a datetime object.
@@ -301,11 +300,14 @@ def check_input_month_and_year(input_string):
         return True
     except ValueError:
         return False
+    
+
+### Report for users need to privde advise to user if they expsense money over the amount of income #### 
 
 def generate_report_ui(user):
     month_input = input("Enter month (MM/YYYY): ")
     if not check_input_month_and_year(month_input):
-        print("Invalid month format! Use MM/YYYY (format:  03/2023)")
+        print("Invalid month format! Use MM/YYYY (format:  03/2023)")   ## check by month and report to user by month 
         return
  # if it true format  Parsing the string into a datetime object  like input 03/2025 => %m/%Y 
     target_month = datetime.strptime(month_input, "%m/%Y")
@@ -338,7 +340,7 @@ def generate_report_ui(user):
     print("\nPayment Methods:")
     for mode, amount in report['payment_modes'].items():
         print(f"- {mode}: {amount:.2f}")
-
+##Transactio for admin 
 def report_transaction(user):
     month_input = input("Enter month (MM/YYYY) or leave blank: ")
     transactions = user.get_transactions()
@@ -375,7 +377,7 @@ def report_transaction(user):
         ## Toatal of transaction 
     else:
         print("No transactions found")
-
+## login () function 
 def login():
     clear_screen()
     print("==== Login ====")
@@ -393,12 +395,12 @@ def login():
             return user
     print("\nInvalid username or password")
     return None
-
+## user menu for user interface that user can choose option  
 def user_menu(user):
     while True:
         clear_screen()
         print(f"\n=== Welcome {user.username} ===")
-        if isinstance(user, Admin):
+        if isinstance(user, Admin):   ## if they admin admin's interface 
             print("1. View All Transactions")
             print("2. View User Transactions")
             print("3. System Statistics")
@@ -425,7 +427,7 @@ def user_menu(user):
                 break
             else:
                 print("Invalid choice!")
-        else:
+        else:   ### if they are user not admin 
             print("1. Add Transaction")
             print("2. View Monthly Report")
             print("3. View Transaction History")
@@ -443,7 +445,7 @@ def user_menu(user):
             else:
                 print("Invalid choice!")
         input("\nPress Enter to continue...")
-
+## view all transaction for admin 
 def view_all_transactions():
     if os.path.exists("house.csv"):
         try:
@@ -454,7 +456,7 @@ def view_all_transactions():
             print(f"Error reading transactions: {e}")
     else:
         print("No transactions found!")
-
+## sign up function for user to sign up 
 def signup():
     clear_screen()
     print("==== Sign Up ====")
@@ -466,7 +468,7 @@ def signup():
     if any(u.username == username for u in users):
         print("Username already exists!")
         return None
-
+## increase id for each user after they input 
     existing_ids = [int(u.user_id) for u in users if u.user_id.isdigit()]
     new_id = str(max(existing_ids) + 1) if existing_ids else '1'
 
@@ -501,4 +503,4 @@ def main():
             input("Press Enter to continue...")
 
 if __name__ == '__main__':
-    main()
+    main()  ## testing 
